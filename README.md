@@ -23,8 +23,6 @@ dags/
   daily_weather_pipeline.py    # Unified 8-task Airflow DAG
 weather_to_gcs.py              # One-time historical data load (already ran, not in Composer)
 requirements.txt               # Python dependencies for Composer
-.github/workflows/
-  deploy-dags.yml              # Auto-deploy DAGs to Composer on push to main
 ```
 
 ## Local Testing Guide
@@ -140,6 +138,17 @@ bq query --use_legacy_sql=false \
 bq query --use_legacy_sql=false \
   "SELECT * FROM \`msds697-group-project.dds_weather_ml.weather_predictions\` ORDER BY prediction_date DESC LIMIT 5"
 ```
+
+## Deploying to Cloud Composer
+
+After testing locally, push your changes to `main` and then deploy the DAGs to Composer:
+
+```bash
+git push origin main
+gsutil cp dags/*.py gs://us-central1-msds697-weather-9db4cb5c-bucket/dags/
+```
+
+Composer picks up the new files automatically within a couple of minutes.
 
 ## Troubleshooting
 
