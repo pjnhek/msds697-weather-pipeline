@@ -1,0 +1,19 @@
+# Credentials & secrets
+.env
+*.json
+!requirements.txt
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Data files
+*.csv
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
